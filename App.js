@@ -1,15 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {useState} from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider'
 
 export default function App() {
+  const [size, setState] = useState(6);
+  let charset = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV';
+
+  function generate(){
+    let result = '';
+    const charsetLength = charset.length;
+    for ( let i = 0; i < size; i++ ) {
+        result += charset.charAt(Math.floor(Math.random() * charsetLength));
+    }
+    console.log(result);
+  }
+
+
   return (
     <View style={styles.container}>
       <Image
         source={require('./assets/cadeado.png')}
         style={styles.img}
       />
-      <Text style={styles.text}>16 Caracteres</Text>
+      <Text style={styles.text}>{size} Caracteres</Text>
 
 
       <View style={styles.viewSlider}>
@@ -17,9 +30,15 @@ export default function App() {
         style={{height: 70}}
         minimumValue={6}
         maximumValue={20}
+        value={size}
+        onValueChange={(value) => setState(value.toFixed(0))}
         />
       </View>
     
+      <TouchableOpacity style={styles.botao} onPress={generate}>
+        <Text style={styles.text}>Gerar Senha</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
@@ -43,7 +62,15 @@ const styles = StyleSheet.create({
     marginBottom:'10%'
   },
   viewSlider:{
-    width: '75%'
-
+    marginTop: '10%',
+    width: '75%',
+    backgroundColor: '#eee',
+    borderRadius: 20,
+  },
+  botao:{
+    marginTop: 15,
+    backgroundColor: '#eee',
+    borderRadius: 20,
+    padding: 10
   }
 });
