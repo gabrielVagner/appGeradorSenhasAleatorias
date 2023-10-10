@@ -18,7 +18,6 @@ export default function App() {
     }
     console.log(result);
     setNewPassword(result);
-    console.log(newPassword);
     setPopUpPassword(true);
   }
 
@@ -46,7 +45,7 @@ export default function App() {
         <Text style={styles.text}>Gerar Senha</Text>
       </TouchableOpacity>
 
-      <Modal visible={popUpPassword} animationType='fade'>
+      <Modal visible={popUpPassword} animationType='fade' transparent={true}>
         <PopUpNewPassword password={newPassword} setP={()=>setPopUpPassword(false)}/>
       </Modal>
      
