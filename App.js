@@ -1,9 +1,13 @@
 import {useState} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import Slider from '@react-native-community/slider'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Modal } from 'react-native';
+import Slider from '@react-native-community/slider';
+import {PopUpNewPassword} from './components/popup';
 
 export default function App() {
   const [size, setState] = useState(6);
+  const [newPassword, setNewPassword] = useState("");
+  const [popUpPassword, setPopUpPassword] = useState(false);
+
   let charset = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV';
 
   function generate(){
@@ -13,6 +17,9 @@ export default function App() {
         result += charset.charAt(Math.floor(Math.random() * charsetLength));
     }
     console.log(result);
+    setNewPassword(result);
+    console.log(newPassword);
+    setPopUpPassword(true);
   }
 
 
@@ -38,6 +45,11 @@ export default function App() {
       <TouchableOpacity style={styles.botao} onPress={generate}>
         <Text style={styles.text}>Gerar Senha</Text>
       </TouchableOpacity>
+
+      <Modal visible={popUpPassword} animationType='fade'>
+        <PopUpNewPassword password={newPassword} setP={()=>setPopUpPassword(false)}/>
+      </Modal>
+     
 
     </View>
   );
