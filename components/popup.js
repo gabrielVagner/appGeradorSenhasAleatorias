@@ -1,8 +1,16 @@
 import { StyleSheet, Text, View, TouchableOpacity, Pressable} from 'react-native';
 import * as Clipboard from 'expo-clipboard';
+import useStorage from './useStorage';
 
 
 export function PopUpNewPassword({password, setP}){
+
+  const {setItem} = useStorage();
+
+  async function save(){
+    await setItem('@passwords', password);
+  }
+
   async function copyToClipboard(){
     await Clipboard.setStringAsync(password);
     alert('Senha Copiada.')
@@ -22,7 +30,7 @@ export function PopUpNewPassword({password, setP}){
             <TouchableOpacity style={styles.botao} onPress={setP}>
                 <Text style={styles.text}>OK</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.botao, styles.botaoS]} onPress={()=>console.log('salvar')} >
+            <TouchableOpacity style={[styles.botao, styles.botaoS]} onPress={save}>
                 <Text style={styles.text}>Salvar Senha</Text>
             </TouchableOpacity>
           </View>

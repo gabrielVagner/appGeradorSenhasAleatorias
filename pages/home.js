@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, Modal } from 'react-na
 import Slider from '@react-native-community/slider';
 import {PopUpNewPassword} from '../components/popup';
 
+
 export function Home() {
   const [size, setState] = useState(6);
   const [newPassword, setNewPassword] = useState("");
@@ -16,7 +17,7 @@ export function Home() {
     for ( let i = 0; i < size; i++ ) {
         result += charset.charAt(Math.floor(Math.random() * charsetLength));
     }
-    console.log(result);
+    //console.log(result);
     setNewPassword(result);
     setPopUpPassword(true);
   }
