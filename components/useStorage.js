@@ -43,7 +43,7 @@ const useStorage = () => {
     const emptStorage = async (key) => {
         try {
             await AsyncStorage.setItem(key, '');
-            console.log(await getItem(key));
+            return(await getItem(key));
         } catch (error) {
             return[]
         }

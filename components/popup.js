@@ -30,7 +30,7 @@ export function PopUpNewPassword({password, setP}){
             <TouchableOpacity style={styles.botao} onPress={setP}>
                 <Text style={styles.text}>OK</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.botao, styles.botaoS]} onPress={save}>
+            <TouchableOpacity style={[styles.botao, styles.botaoS]} onPressIn={save} onPress={setP}>
                 <Text style={styles.text}>Salvar Senha</Text>
             </TouchableOpacity>
           </View>
